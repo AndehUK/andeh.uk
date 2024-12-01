@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 270 70% 50%; /* Purple */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 225 70% 45%; /* Dark Blue */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 0 90% 60%; /* Red */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 270 70% 50%; /* Matching primary */
+    --chart-1: 270 70% 50%; /* Purple */
+    --chart-2: 225 70% 45%; /* Dark Blue */
+    --chart-3: 0 90% 60%; /* Red */
+    --chart-4: 280 70% 55%; /* Light Purple */
+    --chart-5: 215 80% 50%; /* Light Blue */
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 225 30% 8%; /* Dark blue-tinted background */
+    --foreground: 0 0% 98%;
+    --card: 225 25% 12%; /* Slightly lighter than background */
+    --card-foreground: 0 0% 98%;
+    --popover: 225 25% 12%; /* Matching card */
+    --popover-foreground: 0 0% 98%;
+    --primary: 270 70% 50%; /* Purple */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 225 70% 45%; /* Dark Blue */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 225 25% 20%; /* Muted dark blue */
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 0 90% 60%; /* Red */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 225 25% 20%; /* Matching muted */
+    --input: 225 25% 20%; /* Matching muted */
+    --ring: 270 70% 50%; /* Matching primary */
+    --chart-1: 270 70% 50%; /* Purple */
+    --chart-2: 225 70% 45%; /* Dark Blue */
+    --chart-3: 0 90% 60%; /* Red */
+    --chart-4: 280 70% 55%; /* Light Purple */
+    --chart-5: 215 80% 50%; /* Light Blue */
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 47% 20%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
