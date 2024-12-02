@@ -15,9 +15,7 @@ const ThemeToggle = () => {
     if (!isResolved) {
       setIsDark(resolvedTheme === "dark");
 
-      setTimeout(() => {
-        setIsResolved(true);
-      }, 1000);
+      setIsResolved(true);
     }
   }, [resolvedTheme, isResolved]);
 

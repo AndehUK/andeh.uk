@@ -78,7 +78,7 @@ export function NavMain({
                       tooltip={item.title}
                     >
                       {item.icon && (
-                        <item.icon className="!size-8 rounded-xl bg-slate-800 p-1 transition duration-300 group-hover/item:scale-110 group-hover/item:bg-slate-700" />
+                        <item.icon className="!size-8 rounded-xl bg-slate-200 p-1 transition duration-300 group-hover/item:scale-110 group-hover/item:bg-slate-300 dark:bg-slate-800 dark:group-hover/collapsible:bg-slate-700" />
                       )}
                       <span>{item.title}</span>
                       {!!item.items && (
@@ -117,7 +117,7 @@ export function NavMain({
                   size="lg"
                 >
                   {item.icon && (
-                    <item.icon className="!size-8 rounded-xl bg-slate-800 p-1 transition duration-300 group-hover/item:scale-110 group-hover/item:bg-slate-700" />
+                    <item.icon className="!size-8 rounded-xl bg-slate-200 p-1 transition duration-300 group-hover/item:scale-110 group-hover/item:bg-slate-300 dark:bg-slate-800 dark:group-hover/item:bg-slate-700" />
                   )}
                   <span>{item.title}</span>
                 </SidebarMenuButton>
