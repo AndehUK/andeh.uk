@@ -4,10 +4,14 @@ import * as React from "react";
 import {
   Code2Icon,
   GithubIcon,
+  Handshake,
+  HouseIcon,
   Linkedin,
   MailIcon,
   MenuIcon,
+  School2Icon,
   TerminalIcon,
+  User,
 } from "lucide-react";
 
 import { NavMain } from "./nav-main";
@@ -23,13 +27,15 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 
+import { PROJECTS } from "@/lib/projects";
+
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
+    {
+      title: "Home",
+      url: "/",
+      icon: HouseIcon,
+    },
     {
       title: "Command Mode",
       url: "~command",
@@ -44,10 +50,18 @@ const data = {
       title: "Projects",
       url: "/projects",
       icon: Code2Icon,
-      items: [
-        { title: "All Projects", url: "/projects" },
-        { title: "Collaboration Tool", url: "/projects" },
-      ],
+      items: PROJECTS.map((project) => ({
+        title: project.title,
+        url: `/projects/${project.slug}`,
+        icon: (() => {
+          const icons = {
+            personal: User,
+            professional: Handshake,
+            university: School2Icon,
+          };
+          return icons[project.type];
+        })(),
+      })),
     },
   ],
   navSecondary: [

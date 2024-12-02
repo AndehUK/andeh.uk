@@ -9,7 +9,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
 

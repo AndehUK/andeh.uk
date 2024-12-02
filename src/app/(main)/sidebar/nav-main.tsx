@@ -1,7 +1,6 @@
 "use client";
 
 import { ChevronRight, type LucideIcon } from "lucide-react";
-import { toast } from "sonner";
 
 import {
   Collapsible,
@@ -17,6 +16,8 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { useMode } from "@/components/providers/mode-provider";
+import { usePathname } from "next/navigation";
 
 export function NavMain({
   items,
@@ -29,23 +30,27 @@ export function NavMain({
     items?: {
       title: string;
       url: string;
+      icon?: LucideIcon;
     }[];
   }[];
 }) {
+  const { mode, setMode } = useMode();
+  const pathname = usePathname();
+
   const executeAction = (actionUrl: string) => {
     if (actionUrl === "~command") {
-      executeCommandAction();
+      setMode(mode !== "command" ? "command" : "home");
     } else if (actionUrl === "~navigation") {
-      executeNavigationAction();
+      setMode(mode !== "navigation" ? "navigation" : "home");
+    } else if (actionUrl === "~home") {
+      setMode("home");
     }
   };
 
-  const executeCommandAction = () => {
-    toast.success("Command executed!");
-  };
-
-  const executeNavigationAction = () => {
-    toast.success("Navigation command received!");
+  const isRouteDisabled = (url: string) => {
+    console.log({ url, pathname });
+    console.log(url === pathname);
+    return url === pathname;
   };
 
   return (
@@ -81,7 +86,11 @@ export function NavMain({
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <a href={subItem.url}>
+                            <a
+                              href={subItem.url}
+                              className="flex items-center gap-x-2"
+                            >
+                              {subItem.icon && <subItem.icon />}
                               <span>{subItem.title}</span>
                             </a>
                           </SidebarMenuSubButton>
@@ -113,12 +122,12 @@ export function NavMain({
               return (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
-                    asChild
                     className="group/item"
                     size="lg"
                     tooltip={item.title}
+                    disabled={isRouteDisabled(item.url)}
                   >
-                    <a href={item.url}>
+                    <a href={item.url} className="flex items-center gap-x-2">
                       {item.icon && (
                         <item.icon className="!size-8 rounded-xl bg-slate-800 p-1 transition duration-300 group-hover/item:scale-110 group-hover/item:bg-slate-700" />
                       )}
