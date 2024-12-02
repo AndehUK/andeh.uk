@@ -93,9 +93,12 @@ const AboutPage = () => {
             </h3>
             <p className="text-slate-400">
               Front-end Web Developer at{" "}
-              <Hyperlink label="Smooth Brain Games" href="/" />, where I develop
-              responsive web applications using React and collaborate with
-              design teams to implement user interfaces.
+              <Hyperlink
+                label="Smooth Brain Games"
+                href="https://smoothbrain.gg"
+              />
+              , where I develop responsive web applications using React and
+              collaborate with design teams to implement user interfaces.
             </p>
           </div>
           <div className="rounded-lg bg-slate-800/50 p-6">
@@ -105,9 +108,17 @@ const AboutPage = () => {
             </h3>
             <p className="text-slate-400">
               Full-stack development at{" "}
-              <Hyperlink label="Projekt Rising" href="/" />, Python development
-              at <Hyperlink label="BisectHosting" href="/" />, and various
-              freelance projects focusing on TypeScript and Next.js.
+              <Hyperlink
+                label="Projekt Rising"
+                href="https://projektrising.ai"
+              />
+              , Python development at{" "}
+              <Hyperlink
+                label="BisectHosting"
+                href="https://bisecthosting.com/Andeh"
+              />
+              , and various freelance projects focusing on TypeScript and
+              Next.js.
             </p>
           </div>
         </div>
