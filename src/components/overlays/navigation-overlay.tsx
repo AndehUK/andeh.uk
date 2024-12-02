@@ -15,27 +15,27 @@ type NavigationRoute = {
 const NAVIGATION_ROUTES: NavigationRoute[] = [
   {
     label: "Home",
-    description: "Navigate to home section",
+    description: "Navigate to the home page",
     href: "/",
   },
   {
     label: "About",
-    description: "Navigate to home section",
+    description: "Navigate to the about page",
     href: "/about",
   },
   {
     label: "Projects",
-    description: "Navigate to home section",
+    description: "Navigate to the projects page",
     href: "/projects",
   },
   {
     label: "Blog",
-    description: "Navigate to home section",
+    description: "Navigate to the blog page",
     href: "/blog",
   },
   {
     label: "Contact",
-    description: "Navigate to home section",
+    description: "Navigate to the contact page",
     href: "/contact",
   },
 ];
