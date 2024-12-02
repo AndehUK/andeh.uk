@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, HouseIcon, type LucideIcon } from "lucide-react";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 
 import {
   Collapsible,
@@ -18,7 +18,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useMode } from "@/components/providers/mode-provider";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export function NavMain({
   items,
@@ -36,15 +36,20 @@ export function NavMain({
   }[];
 }) {
   const { mode, setMode } = useMode();
-  const pathname = usePathname();
+  const router = useRouter();
   const { setOpenMobile, isMobile } = useSidebar();
 
   const executeAction = (actionUrl: string) => {
-    if (actionUrl === "~command") {
-      setMode(mode !== "command" ? "command" : "home");
-    } else if (actionUrl === "~navigation") {
-      setMode(mode !== "navigation" ? "navigation" : "home");
-    } else if (actionUrl === "~home") {
+    if (actionUrl.startsWith("~")) {
+      if (actionUrl === "~command") {
+        setMode(mode !== "command" ? "command" : "home");
+      } else if (actionUrl === "~navigation") {
+        setMode(mode !== "navigation" ? "navigation" : "home");
+      } else if (actionUrl === "~home") {
+        setMode("home");
+      }
+    } else {
+      router.push(actionUrl);
       setMode("home");
     }
 
@@ -52,22 +57,6 @@ export function NavMain({
       setOpenMobile(false);
     }
   };
-
-  const isRouteDisabled = (url: string) => {
-    if (url === "/" && mode !== "home") {
-      return false;
-    }
-
-    return url === pathname;
-  };
-
-  if (pathname === "/") {
-    items[0] = {
-      title: "Home",
-      url: "~home",
-      icon: HouseIcon,
-    };
-  }
 
   return (
     <SidebarGroup>
@@ -118,46 +107,21 @@ export function NavMain({
               </Collapsible>
             );
           } else {
-            if (item.url.startsWith("~")) {
-              return (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    onClick={() => executeAction(item.url)}
-                    tooltip={item.title}
-                    className="group/item"
-                    size="lg"
-                  >
-                    {item.icon && (
-                      <item.icon className="!size-8 rounded-xl bg-slate-800 p-1 transition duration-300 group-hover/item:scale-110 group-hover/item:bg-slate-700" />
-                    )}
-                    <span>{item.title}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              );
-            } else {
-              return (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    className="group/item"
-                    size="lg"
-                    tooltip={item.title}
-                    disabled={isRouteDisabled(item.url)}
-                    onClick={() => {
-                      if (isMobile) {
-                        setOpenMobile(false);
-                      }
-                    }}
-                  >
-                    <a href={item.url} className="flex items-center gap-x-2">
-                      {item.icon && (
-                        <item.icon className="!size-8 rounded-xl bg-slate-800 p-1 transition duration-300 group-hover/item:scale-110 group-hover/item:bg-slate-700" />
-                      )}
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              );
-            }
+            return (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton
+                  onClick={() => executeAction(item.url)}
+                  tooltip={item.title}
+                  className="group/item"
+                  size="lg"
+                >
+                  {item.icon && (
+                    <item.icon className="!size-8 rounded-xl bg-slate-800 p-1 transition duration-300 group-hover/item:scale-110 group-hover/item:bg-slate-700" />
+                  )}
+                  <span>{item.title}</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            );
           }
         })}
       </SidebarMenu>

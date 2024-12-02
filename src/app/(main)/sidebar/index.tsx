@@ -3,6 +3,7 @@
 import * as React from "react";
 import {
   Code2Icon,
+  GitForkIcon,
   GithubIcon,
   Handshake,
   HouseIcon,
@@ -65,6 +66,11 @@ const data = {
     },
   ],
   navSecondary: [
+    {
+      title: "Source",
+      url: "https://github.com/AndehUK/andeh.uk",
+      icon: GitForkIcon,
+    },
     {
       title: "GitHub",
       url: "https://github.com/AndehUK",

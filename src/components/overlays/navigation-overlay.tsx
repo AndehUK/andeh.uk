@@ -74,6 +74,7 @@ export const NavigationOverlay = () => {
 
   const gridClassExpanded = "min-[885px]:grid-cols-2";
   const gridClassCollapsed = "sm:grid-cols-2";
+  const oddNumberItemsClass = "min-[885px]:last:col-span-2";
 
   return (
     <div
@@ -92,7 +93,10 @@ export const NavigationOverlay = () => {
           <Button
             key={i}
             size="unspecified"
-            className="group relative transform flex-col items-start rounded-lg bg-slate-800 p-8 transition-all duration-300 hover:scale-105 hover:bg-slate-700"
+            className={cn(
+              "group relative transform flex-col items-center rounded-lg bg-slate-800 p-8 transition-all duration-300 hover:scale-105 hover:bg-slate-700",
+              NAVIGATION_ROUTES.length % 2 !== 0 && oddNumberItemsClass,
+            )}
             style={{
               animation: `fadeIn 0.3s ease-out ${i * 0.15}s`,
             }}
