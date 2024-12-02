@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react";
+import { ChevronRight, HouseIcon, type LucideIcon } from "lucide-react";
 
 import {
   Collapsible,
@@ -15,6 +15,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { useMode } from "@/components/providers/mode-provider";
 import { usePathname } from "next/navigation";
@@ -36,6 +37,7 @@ export function NavMain({
 }) {
   const { mode, setMode } = useMode();
   const pathname = usePathname();
+  const { setOpenMobile, isMobile } = useSidebar();
 
   const executeAction = (actionUrl: string) => {
     if (actionUrl === "~command") {
@@ -45,13 +47,27 @@ export function NavMain({
     } else if (actionUrl === "~home") {
       setMode("home");
     }
+
+    if (isMobile) {
+      setOpenMobile(false);
+    }
   };
 
   const isRouteDisabled = (url: string) => {
-    console.log({ url, pathname });
-    console.log(url === pathname);
+    if (url === "/" && mode !== "home") {
+      return false;
+    }
+
     return url === pathname;
   };
+
+  if (pathname === "/") {
+    items[0] = {
+      title: "Home",
+      url: "~home",
+      icon: HouseIcon,
+    };
+  }
 
   return (
     <SidebarGroup>
@@ -126,6 +142,11 @@ export function NavMain({
                     size="lg"
                     tooltip={item.title}
                     disabled={isRouteDisabled(item.url)}
+                    onClick={() => {
+                      if (isMobile) {
+                        setOpenMobile(false);
+                      }
+                    }}
                   >
                     <a href={item.url} className="flex items-center gap-x-2">
                       {item.icon && (
