@@ -1,38 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  Menu,
-  X,
-  Command,
-  Terminal,
-  Github,
-  Linkedin,
-  Mail,
-} from "lucide-react";
+import React, { useState } from "react";
+import { Menu, X, Terminal, Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 
 export default function Portfolio() {
   const [isOpen, setIsOpen] = useState(false);
-  const [commandMode, setCommandMode] = useState(false);
-  const [command, setCommand] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
-  const processCommand = (cmd: string) => {
-    const commands = {
-      home: "/",
-      about: "/about",
-      projects: "/projects",
-      labs: "/labs",
-      blog: "/blog",
-      contact: "/contact",
-    };
-    return commands[cmd.toLowerCase()] || "Command not found";
-  };
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">
@@ -48,10 +21,7 @@ export default function Portfolio() {
         </Link>
 
         <div className="flex flex-col items-center gap-8">
-          <button
-            className="group flex h-12 w-12 items-center justify-center rounded-xl bg-slate-800 transition-all duration-300 hover:scale-110 hover:bg-slate-700"
-            onClick={() => setCommandMode(true)}
-          >
+          <button className="group flex h-12 w-12 items-center justify-center rounded-xl bg-slate-800 transition-all duration-300 hover:scale-110 hover:bg-slate-700">
             <Terminal
               className="text-slate-400 transition-colors group-hover:text-white"
               size={20}
@@ -94,54 +64,6 @@ export default function Portfolio() {
           </a>
         </div>
       </div>
-
-      {/* Command Mode Overlay */}
-      {commandMode && (
-        <div
-          className="fixed inset-0 flex transform items-center justify-center bg-slate-900 bg-opacity-95 transition-all duration-300"
-          style={{
-            animation: "fadeIn 0.3s ease-out",
-          }}
-        >
-          <div
-            className="w-full max-w-2xl transform p-8 transition-all duration-500"
-            style={{
-              animation: "slideIn 0.5s ease-out",
-            }}
-          >
-            <div className="mb-6 flex items-center gap-4">
-              <Command className="text-purple-400" size={24} />
-              <span className="text-purple-400">Command Mode</span>
-            </div>
-            <div className="flex items-center gap-4 rounded-lg bg-slate-800 p-4">
-              <span className="text-purple-400">→</span>
-              <input
-                type="text"
-                className="flex-1 border-none bg-transparent text-white outline-none"
-                placeholder="Type a command (e.g., 'about', 'projects')"
-                value={command}
-                onChange={(e) => setCommand(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    console.log(processCommand(command));
-                    setCommand("");
-                  }
-                  if (e.key === "Escape") {
-                    setCommandMode(false);
-                  }
-                }}
-                autoFocus
-              />
-            </div>
-            <button
-              className="absolute right-8 top-8 text-slate-400 transition-colors duration-300 hover:text-white"
-              onClick={() => setCommandMode(false)}
-            >
-              <X size={24} />
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Full Navigation Overlay */}
       {isOpen && (
