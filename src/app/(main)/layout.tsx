@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import ThemeToggle from "@/components/theme-toggle";
 import { ModeProvider } from "@/components/providers/mode-provider";
 import { CommandOverlay } from "@/components/overlays/command-overlay";
+import { NavigationOverlay } from "@/components/overlays/navigation-overlay";
 
 type Props = {
   children: React.ReactNode;
@@ -28,6 +29,7 @@ export default function MainLayout({ children }: Props) {
           </header>
           <div className="flex flex-1 flex-col gap-4">
             <CommandOverlay />
+            <NavigationOverlay />
             {children}
           </div>
         </SidebarInset>
