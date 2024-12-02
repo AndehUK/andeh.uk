@@ -5,6 +5,8 @@ import { useMode } from "../providers/mode-provider";
 import { useEffect, useState } from "react";
 import { Loader2, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
+import { useSidebar } from "../ui/sidebar";
+import { cn } from "@/lib/utils";
 
 type NavigationRoute = {
   label: string;
@@ -44,6 +46,7 @@ export const NavigationOverlay = () => {
   const [isRouting, setIsRouting] = useState<boolean>(false);
   const { mode, setMode } = useMode();
   const router = useRouter();
+  const { state } = useSidebar();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -69,6 +72,9 @@ export const NavigationOverlay = () => {
 
   if (mode !== "navigation") return null;
 
+  const gridClassExpanded = "min-[885px]:grid-cols-2";
+  const gridClassCollapsed = "sm:grid-cols-2";
+
   return (
     <div
       className="inset-0 flex h-full transform items-center justify-center transition-all duration-300"
@@ -76,7 +82,12 @@ export const NavigationOverlay = () => {
         animation: "fadeIn 1s ease-out",
       }}
     >
-      <div className="grid max-w-4xl grid-cols-2 gap-8 p-8">
+      <div
+        className={cn(
+          "grid max-w-4xl gap-8 p-8",
+          state === "expanded" ? gridClassExpanded : gridClassCollapsed,
+        )}
+      >
         {NAVIGATION_ROUTES.map((item, i) => (
           <Button
             key={i}
