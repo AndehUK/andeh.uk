@@ -94,6 +94,7 @@ export function NavMain({
                             <a
                               href={subItem.url}
                               className="flex items-center gap-x-2"
+                              aria-disabled
                             >
                               {subItem.icon && <subItem.icon />}
                               <span>{subItem.title}</span>

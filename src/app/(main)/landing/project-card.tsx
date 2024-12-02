@@ -6,8 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ExternalLink } from "lucide-react";
-import Link from "next/link";
 
 type Props = {
   name: string;
@@ -15,7 +20,7 @@ type Props = {
   href: string;
 };
 
-export const ProjectCard = ({ name, description, href }: Props) => {
+export const ProjectCard = ({ name, description }: Props) => {
   return (
     <Card className="flex h-full flex-col hover:bg-card/80">
       <CardHeader>
@@ -23,12 +28,20 @@ export const ProjectCard = ({ name, description, href }: Props) => {
       </CardHeader>
       <CardContent>{description}</CardContent>
       <CardFooter className="flex h-full items-end">
-        <Button asChild>
-          <Link href={href}>
-            <ExternalLink />
-            Go to project
-          </Link>
-        </Button>
+        <TooltipProvider>
+          <Tooltip delayDuration={200}>
+            <TooltipTrigger asChild className="hover:cursor-not-allowed">
+              <Button variant="disabledDefault">
+                <ExternalLink />
+                Go to project
+              </Button>
+              {/* TODO: Add next/link to project */}
+            </TooltipTrigger>
+            <TooltipContent side="right" sideOffset={10}>
+              Coming Soon!
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </CardFooter>
     </Card>
   );

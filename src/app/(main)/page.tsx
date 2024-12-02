@@ -49,15 +49,9 @@ export default function HomePage() {
         <h2 className="mb-8 text-3xl font-semibold">Latest Thoughts</h2>
         <div className="flex flex-col gap-y-6">
           <BlogPost
-            title="System Design: Building for Scale"
-            description="Exploring modern architecture patterns for scalable applications..."
-            date="Nov 25, 2024"
-            href="/"
-          />
-          <BlogPost
-            title="The Future of Web Development"
-            description="Analyzing upcoming trends and technologies in web development..."
-            date="Nov 20, 2024"
+            title="Blog Coming Soon!"
+            description="This part of my website is still under construction. Check back soon for updates!"
+            date="December 2, 2024"
             href="/"
           />
         </div>

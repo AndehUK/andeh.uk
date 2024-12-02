@@ -12,6 +12,7 @@ type NavigationRoute = {
   label: string;
   description: string;
   href: string;
+  disabled?: boolean;
 };
 
 const NAVIGATION_ROUTES: NavigationRoute[] = [
@@ -27,18 +28,21 @@ const NAVIGATION_ROUTES: NavigationRoute[] = [
   },
   {
     label: "Projects",
-    description: "Navigate to the projects page",
+    description: "Projects page coming soon!",
     href: "/projects",
+    disabled: true,
   },
   {
     label: "Blog",
-    description: "Navigate to the blog page",
+    description: "Blog page coming soon!",
     href: "/blog",
+    disabled: true,
   },
   {
     label: "Contact",
-    description: "Navigate to the contact page",
+    description: "Contact page coming soon!",
     href: "/contact",
+    disabled: true,
   },
 ];
 
@@ -101,7 +105,7 @@ export const NavigationOverlay = () => {
               animation: `fadeIn 0.3s ease-out ${i * 0.15}s`,
             }}
             onClick={() => navigateTo(item.href)}
-            disabled={isRouting}
+            disabled={isRouting || item.disabled}
           >
             {isRouting && (
               <div className="absolute inset-0 flex items-center justify-center bg-slate-800/50">

@@ -16,7 +16,7 @@ type Props = {
 
 export const BlogPost = ({ title, description, date, href }: Props) => {
   return (
-    <Link href={href}>
+    <Link href={href} className="hover:cursor-not-allowed">
       <Card className="flex h-full flex-col border-b-0 border-l-4 border-r-0 border-t-0 border-purple-500 bg-transparent shadow-none hover:bg-card/80">
         <CardHeader>
           <CardTitle>{title}</CardTitle>
