@@ -9,6 +9,7 @@ import ThemeToggle from "@/components/theme-toggle";
 import { ModeProvider } from "@/components/providers/mode-provider";
 import { CommandOverlay } from "@/components/overlays/command-overlay";
 import { NavigationOverlay } from "@/components/overlays/navigation-overlay";
+import { MenuProvider } from "@/components/providers/menu-provider";
 
 type Props = {
   children: React.ReactNode;
@@ -28,6 +29,7 @@ export default function MainLayout({ children }: Props) {
             </div>
           </header>
           <div className="flex flex-1 flex-col gap-4">
+            <MenuProvider />
             <CommandOverlay />
             <NavigationOverlay />
             {children}

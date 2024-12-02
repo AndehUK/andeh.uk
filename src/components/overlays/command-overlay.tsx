@@ -1,22 +1,39 @@
 "use client";
 
 import { type Mode, useMode } from "@/components/providers/mode-provider";
+import { useCommandHelp } from "@/hooks/use-command-help";
+import { useNavigationList } from "@/hooks/use-navigation-ls";
 import { CommandIcon, XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const AVAILABLE_COMMANDS: string[] = [
+  "cd ~/",
   "cd ~/home",
   "cd ~/about",
   "cd ~/projects",
   "cd ~/contact",
   "ls",
   "help",
+  "navigate",
+  "source",
+  "github",
+  "linkedin",
 ];
+
+type ExternalLink = "source" | "github" | "linkedin";
+
+const externalLinks = {
+  source: "https://github.com/AndehUK/andeh.uk",
+  github: "https://github.com/AndehUK",
+  linkedin: "https://www.linkedin.com/in/andehx/",
+};
 
 export const CommandOverlay = () => {
   const { mode, setMode } = useMode();
+  const { open: openCommandHelp } = useCommandHelp();
+  const { open: openNavigationList } = useNavigationList();
   const [command, setCommand] = useState<string>("");
   const router = useRouter();
 
@@ -31,10 +48,19 @@ export const CommandOverlay = () => {
 
   const processCommand = useCallback(() => {
     if (AVAILABLE_COMMANDS.includes(command)) {
-      if (command === "cd ~/about") {
-        transitionToPage("/about");
-      } else if (command === "cd ~/home") {
-        transitionToPage("/");
+      if (command.startsWith("cd ~/")) {
+        transitionToPage(command.replace("cd ~", "").replace("home", ""));
+      } else if (command === "help") {
+        openCommandHelp();
+      } else if (command === "ls") {
+        openNavigationList();
+      } else if (command === "navigate") {
+        setMode("navigation");
+      } else {
+        const link = externalLinks[command as ExternalLink];
+        if (link) {
+          window.open(link, "_blank");
+        }
       }
     } else {
       toast.error(
@@ -43,7 +69,7 @@ export const CommandOverlay = () => {
     }
 
     setCommand("");
-  }, [command, transitionToPage]);
+  }, [command, transitionToPage, openCommandHelp, openNavigationList, setMode]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -84,7 +110,7 @@ export const CommandOverlay = () => {
           <input
             type="text"
             className="flex-1 border-none bg-transparent text-white outline-none"
-            placeholder="Type a command (e.g., 'cd ~/about', 'cd ~/projects')"
+            placeholder="Type a command - 'help' for a list of commands"
             value={command}
             onChange={(e) => setCommand(e.target.value)}
             autoFocus
